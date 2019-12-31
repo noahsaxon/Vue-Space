@@ -7,6 +7,12 @@ const app = new Vue({
             {nombre:"MEMA", estado:"disponible"},
             {nombre:"MEME", estado:"ocupado"},            
             {nombre:"MEMI", estado:"disponible"},
-        ]
+        ],
+        nuevoItem:""
+    },
+    methods:{
+        addItem () {
+            this.objetos.push({nombre:this.nuevoItem , estado:"disponible"})
+        }
     }
 })
