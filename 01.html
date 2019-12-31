@@ -20,8 +20,9 @@
                 <span v-if="item2.estado !== 'ocupado'">  {{item2.nombre}} -   {{item2.estado}}</span>
             </li>
         </ul>
-        <input type="text" v-model="nuevoItem">
-        <button @click="addItem">Add</button>
+        <input type="text" v-model="nuevoItem" @keyup.enter="addItem">
+        <!--     <button @click="addItem">Add</button>    -->
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="01.js"></script>
