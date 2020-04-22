@@ -6,18 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./03.js"> </script>
+    <script src="./contador.js"></script>
+    <script src="./saludo.js"></script>
 </head>
 <body>
     <div id="app">
-        <componenteNuevo></componenteNuevo>
-        <componenteNuevo></componenteNuevo>
-        <componenteNuevo></componenteNuevo>
+        <saludo></saludo>   
+        <contador></contador>
+        <contador></contador>
     </div>
 
-    <script>
+    <script> 
+
         new Vue({
-            el:"#app"
+            el:'#app',
+            data: {
+                saludo:"Hola"
+            }
         })
     </script>
 </body>
