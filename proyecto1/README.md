@@ -22,3 +22,10 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+##PROYECTO 1
+-componentes 
+-vuex
+    - state
+    
