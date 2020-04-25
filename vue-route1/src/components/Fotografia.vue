@@ -1,12 +1,11 @@
 <template>
     <div>
-        Service
+        <h1>Foto desde componete: {{$route.params.id}}</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name:'Service',
-    props:[]
+    name: 'Foto'
 }
 </script>
