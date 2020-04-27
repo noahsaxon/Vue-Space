@@ -28,4 +28,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 -componentes 
 -vuex
     - state
+
+    
+![](ezgif.com-video-to-gif.gif)    
     
