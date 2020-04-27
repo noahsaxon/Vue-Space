@@ -2,15 +2,18 @@
     <div>
          <h1>Lista de Tareas</h1>
             <router-link :to="{name: 'agregar'}">
-                <button>Agregar</button>
+                <button class="btn btn-success btn-block">Agregar</button>
             </router-link>
-         <ul>
-             <li v-for="item of tareas" :key="item.id">
+
+         <ul class="list-group mt-5">
+             <li v-for="item of tareas" :key="item.id" class="list-group-item"> 
                  {{item.id}} - {{item.nombre}}
-                <router-link :to="{name:'editar' , params: {id:item.id}}" >
-                        <button>Editar</button>
+                 <div class="float-right">
+                <router-link :to="{name:'editar' , params: {id:item.id}}" class="mr-2 " >
+                        <button class="btn btn-info btn-sm">Editar</button>
                 </router-link>
-                  <button @click="eliminarTareas(item.id)">Eliminar</button>
+                  <button class="btn btn-danger btn-sm"  @click="eliminarTareas(item.id)">Eliminar</button>
+                 </div>
              </li>
 
          </ul>
