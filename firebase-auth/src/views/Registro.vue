@@ -5,7 +5,7 @@
             <input type="email" v-model="email">
             <input type="password"  v-model="pass1">
             <input type="password"  v-model="pass2">
-            <button type="submit">Crear Usuario</button>
+            <button type="submit" :disabled="!desactivar">Crear Usuario</button>
         </form>
         <p>{{error}}</p>
     </div>
@@ -29,7 +29,10 @@ export default {
         ...mapActions(['createUsuario'])
     },
     computed:{
-        ...mapState(['error'])
+        ...mapState(['error']),
+        desactivar(){
+            return this.pass1 === this.pass2 && this.pass1 != ''
+        }
     }
 }
 </script>
