@@ -8,6 +8,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    tareas: [],
+    tarea: {nombre:'' , id:''},
     usuario : '',
     error: ''
   },
@@ -17,6 +19,18 @@ export default new Vuex.Store({
     },
     setError(state, payload){
       state.error = payload
+    },
+     setTareas(state, tareasAct) {
+      state.tareas = tareasAct
+    },
+    setTarea(state , tarea){
+      state.tarea = tarea
+//      state.tareas.push(tarea)
+    },
+    eliminarTareas(state , id){
+      state.tareas = state.tareas.filter( doc => {
+        return doc.id != id
+      })
     }
   },
   actions: {
@@ -59,7 +73,57 @@ export default new Vuex.Store({
       }).catch(function(error) {
         console.log(errors)
       });
+    },
+    getTareas({commit}){
+      const tareas = [];
+      const usuario = firebase.auth().currentUser;
+      db.collection(usuario.uid).get()
+      .then( snapshot => {
 
+        snapshot.forEach(doc => {
+
+          let tarea = doc.data()
+          tarea.id = doc.id
+          tareas.push(tarea)
+
+         })
+
+        commit('setTareas', tareas)
+
+      })
+    }, 
+    getTarea({commit} , id){
+      const usuario = firebase.auth().currentUser;      
+      db.collection(usuario.currentUser).doc(id).get()
+      .then(doc => {
+        let tarea = doc.data();
+        tarea.id = doc.id;
+        commit('setTarea' , tarea)
+      })
+    },
+    editarTarea({commit}, tarea){
+      const usuario = firebase.auth().currentUser;      
+      db.collection(usuario.uid).doc(tarea.id).update({
+        nombre: tarea.nombre
+      }).then(()=>{
+        router.push({name:'inicio'})
+      })
+    },
+    agregarTarea({commit} , nombre){
+      const usuario = firebase.auth().currentUser;    
+      db.collection(usuario.uid).add({
+        nombre
+      }).then((doc)=> {
+        console.log(doc.id)
+        router.push({name:'inicio'})
+      })
+    },
+    eliminarTareas({commit, dispatch} , id){
+      const usuario = firebase.auth().currentUser;    
+      db.collection(usuario.uid).doc(id).delete().then( () => {
+        console.log('Tarea eliminada.')
+        commit('eliminarTareas',id)
+      })
     }
   },
   getters: {
