@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
-
+import db from '../main'
 var firebase = require("firebase/app")
 
 Vue.use(Vuex)
@@ -18,12 +18,18 @@ export default new Vuex.Store({
     setError(state, payload){
       state.error = payload
     }
-  }, 
+  },
   actions: {
+
     createUsuario({commit}, payload){
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).then( res =>{
+
         commit('setUsuario' , {email: res.user.email , uid:res.user.uid})
-        router.push({name:'inicio'})
+        db.collection(res.user.uid).add({
+          nombre:"Tarea de Ejemplo"
+        }).then((doc)=> {
+          router.push({name:'inicio'})
+        })
       }).catch(function(error) {
         commit('setError' , error.message)
       });
