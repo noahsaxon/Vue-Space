@@ -11,6 +11,7 @@
             <b-nav-item to="/" exact>Home</b-nav-item>
             <b-nav-item to="about"> About</b-nav-item>
             <b-nav-item to="grid"> Grid</b-nav-item>
+            <b-nav-item to="cards"> Cards</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-container>
