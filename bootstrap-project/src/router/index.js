@@ -13,34 +13,26 @@ Vue.use(VueRouter)
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import( '../views/About.vue')
   },
   {
     path: '/grid',
     name: 'Grid',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Grid.vue')
+    component: () => import('../views/Grid.vue')
   },
   {
     path: '/cards',
     name: 'Cards',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cards.vue')
+    component: () => import('../views/Cards.vue')
   },
   {
     path: '/form',
     name: 'Form',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Form.vue')
+    component: () => import('../views/Form.vue')
+  },  {
+    path: '/validacion',
+    name: 'Validacion',
+    component: () => import('../views/Validacion.vue')
   }  
 ]
 

@@ -18,7 +18,7 @@
                             <b-form-radio v-model="selected" name="some-radios" value="B">Option B</b-form-radio>
                             </b-form-group>
                     </b-col>
-                    <b-cool md="3">
+                    <b-col md="3">
                         <b-form-checkbox-group
                             id="checkbox-group-1"
                             v-model="selected2"
@@ -26,7 +26,7 @@
                             name="flavour-1"
                         ></b-form-checkbox-group>
                         <div>Selected: <strong>{{ selected2 }}</strong></div>
-                    </b-cool>
+                    </b-col>
                 </b-row>
 
         </form>
