@@ -11,7 +11,8 @@ export default new Vuex.Store({
     tareas: [],
     tarea: {nombre:'' , id:''},
     usuario : '',
-    error: ''
+    error: '',
+    carga:false
   },
   mutations: {
     setUsuario(state, payload) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
       state.tareas = state.tareas.filter( doc => {
         return doc.id != id
       })
+    },
+    cargarFirebase(state , payload) {
+      state.carga = payload
     }
   },
   actions: {
@@ -76,6 +80,7 @@ export default new Vuex.Store({
     },
     getTareas({commit}){
       const tareas = [];
+      commit('cargarFirebase' , true);
       const usuario = firebase.auth().currentUser;
       db.collection(usuario.uid).get()
       .then( snapshot => {
@@ -85,7 +90,7 @@ export default new Vuex.Store({
           let tarea = doc.data()
           tarea.id = doc.id
           tareas.push(tarea)
-
+          commit('cargarFirebase' , false);
          })
 
         commit('setTareas', tareas)
@@ -94,7 +99,7 @@ export default new Vuex.Store({
     }, 
     getTarea({commit} , id){
       const usuario = firebase.auth().currentUser;      
-      db.collection(usuario.currentUser).doc(id).get()
+      db.collection(usuario.uid).doc(id).get()
       .then(doc => {
         let tarea = doc.data();
         tarea.id = doc.id;
@@ -103,17 +108,21 @@ export default new Vuex.Store({
     },
     editarTarea({commit}, tarea){
       const usuario = firebase.auth().currentUser;      
+      commit('cargarFirebase' , true);
       db.collection(usuario.uid).doc(tarea.id).update({
         nombre: tarea.nombre
       }).then(()=>{
+        commit('cargarFirebase' , false);
         router.push({name:'inicio'})
       })
     },
     agregarTarea({commit} , nombre){
       const usuario = firebase.auth().currentUser;    
+      commit('cargarFirebase' , true);
       db.collection(usuario.uid).add({
         nombre
       }).then((doc)=> {
+        commit('cargarFirebase' , false);
         console.log(doc.id)
         router.push({name:'inicio'})
       })

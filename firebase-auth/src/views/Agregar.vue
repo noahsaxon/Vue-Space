@@ -7,17 +7,20 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Nombre</div>
             </div>
-                <input type="text" class="form-control" v-model="nombre" >
-            </div>
+                <input type="text" class="form-control" v-model="$v.nombre.$model" >
 
-            <button  type="submit" class="btn btn-primary mb-2">Agregar</button>
+            </div>
+            <button  type="submit" :disabled="$v.$invalid || carga" class="btn btn-primary mb-2">Agregar</button>
         </form>
+            <small v-if="!$v.nombre.required" class="text-danger">Campo requerido</small>
+            <small v-if="!$v.nombre.minLength" class="text-danger">Minimo 4 caracteres</small>
     </div>
 </template>
 
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions , mapState} from 'vuex'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
     name:'Agregar',
@@ -28,6 +31,12 @@ export default {
     },
     methods: {
         ...mapActions(['agregarTarea'])
+    },
+    validations:{
+        nombre:{required , minLength:minLength(4)}
+    },
+    computed: {
+        ...mapState(['carga'])
     }
 }
 </script>

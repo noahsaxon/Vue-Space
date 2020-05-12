@@ -1,16 +1,21 @@
 <template>
     <div>
-        <div>
-            <h1>Ruta protegida</h1>
+        <div class="text-center"> 
+            <h3>Ruta protegida</h3>
             Bienvenido {{usuario.email}}!
         </div>
 
-         <h2>Lista de Tareas</h2>
+         <h2 class="mb-4"> Lista de Tareas</h2>
             <router-link :to="{name: 'agregar'}">
-                <button class="btn btn-success btn-block">Agregar</button>
+                <button class="btn btn-success btn-block col-md-1">Agregar</button>
             </router-link>
 
-         <ul class="list-group mt-5">
+            <div v-if="carga" class="text-center mt-5">
+                <h3>Cargando contenido</h3>
+                <b-spinner type="grow" variant="success" label="Loading..."></b-spinner>
+            </div>
+
+         <ul class="list-group mt-5" v-if="!carga">
              <li v-for="item of tareas" :key="item.id" class="list-group-item"> 
                  {{item.id}} - {{item.nombre}}
                  <div class="float-right">
@@ -39,7 +44,7 @@ export default {
         this.getTareas();
     },
     computed:{
-        ...mapState(['tareas' , 'usuario'])
+        ...mapState(['tareas' , 'usuario' , 'carga'])
     }
     
 }

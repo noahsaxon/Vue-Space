@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Ruta protegida</h1>
+        <h3>Ruta protegida</h3>
         Bienvenido {{usuario.email}}!
     </div>
 

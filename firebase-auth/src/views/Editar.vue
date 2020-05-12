@@ -6,16 +6,20 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">Nombre</div>
             </div>
-                <input type="text" class="form-control" v-model="tarea.nombre" >
+                <input type="text" class="form-control" v-model="$v.tarea.nombre.$model" >
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Editar</button>
+            <button type="submit" class="btn btn-primary mb-2"  :disabled="$v.tarea.$invalid || carga" >Editar</button>
         </form>
+        {{$v.tarea}}
+            <small v-if="!$v.tarea.nombre.required" class="text-danger">Campo requerido</small>
+            <small v-if="!$v.tarea.nombre.minLength" class="text-danger">Minimo 4 caracteres</small>
     </div>
 </template>
 
 
 <script>
 import {mapActions , mapState} from 'vuex'
+import { required, minLength, between } from 'vuelidate/lib/validators'
 export default {
     name:'Editar',
     data(){
@@ -28,7 +32,12 @@ export default {
         this.getTarea(this.id)
     },
     computed: {
-        ...mapState(['tarea'])
+        ...mapState(['tarea', 'carga'])
+    },
+    validations:{
+        tarea: {
+            nombre:{required , minLength:minLength(4)}
+        }
     }
 }
 </script>
