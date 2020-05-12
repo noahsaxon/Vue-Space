@@ -1,11 +1,11 @@
 <template>
     <div>
         <h1>Registro de usuarios</h1>
-        <form @submit.prevent="createUsuario({email:email , password: pass1})">
-            <input type="email" v-model="email">
-            <input type="password"  v-model="pass1">
-            <input type="password"  v-model="pass2">
-            <button type="submit" :disabled="!desactivar">Crear Usuario</button>
+        <form @submit.prevent="createUsuario({email:$v.email.$model , password: $v.pass1.$model})">
+            <input type="email" placeholder="Ingrese Email" v-model="$v.email.$model"  class="form-control my-2">
+            <input type="password" placeholder="Password" v-model="$v.pass1.$model"  class="form-control my-2">
+            <input type="password" placeholder="Repeat vPassword"  v-model="pass2"  class="form-control my-2">
+            <button type="submit" class="btn btn-primary" :disabled="!desactivar">Crear Usuario</button>
         </form>
         <p>{{error}}</p>
     </div>
@@ -15,7 +15,7 @@
 <script>
 
 import {mapActions , mapState} from 'vuex';
-
+import { required, minLength, email } from 'vuelidate/lib/validators'
 export default {
     name:'Registro',
     data(){
@@ -33,6 +33,15 @@ export default {
         desactivar(){
             return this.pass1 === this.pass2 && this.pass1 != ''
         }
+    },
+    validations:{
+        email: {
+            required, email
+        },
+        pass1: {
+            required,
+            minLength:minLength(6)
+        },
     }
 }
 </script>
