@@ -9,7 +9,7 @@
             <small class="text-danger d-block" v-if="!$v.pass1.required"> Campo Requerido</small>
             <small class="text-danger d-block" v-if="!$v.pass1.minLength"> Minimo 6 caracteres</small>
             <input type="password" placeholder="Repeat vPassword"  v-model="$v.pass2.$model"  class="form-control my-2">            
-            <small class="text-danger d-block" v-if="!$v.pass1.sameAs"> Contrasena no coincide</small>
+            <small class="text-danger d-block" v-if="!$v.pass2.sameAs"> Contrasena no coincide</small>
             <button type="submit" class="btn btn-primary" :disabled="!desactivar">Crear Usuario</button>
         </form>
         <p>{{error}}</p>
