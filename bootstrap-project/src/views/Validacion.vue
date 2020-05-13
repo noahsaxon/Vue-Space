@@ -2,7 +2,7 @@
     <div>
         <h1>Vuelidate</h1>
         <form @submit.prevent="submit">
-            <input type="email" placeholder="Ingresa un email"  v-model="$v.email.$model" class="form-control my-3" :class="{'is-invalid': $v.email.$error}">
+            <input type="email" placeholder="Ingresa un email"  v-model.lazy="$v.email.$model" class="form-control my-3" :class="{'is-invalid': $v.email.$error}">
             <p class="text-danger" v-if="!$v.email.email" > Este email es incorrecto</p>
             <p class="text-danger" v-if="!$v.email.required" > Campo requerido</p>
             <!-- <p>{{$v.email}}</p>-->
