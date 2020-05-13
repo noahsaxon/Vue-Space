@@ -9,14 +9,17 @@
             <router-link :to="{name: 'agregar'}">
                 <button class="btn btn-success btn-block col-md-1">Agregar</button>
             </router-link>
+           <form @submit.prevent="buscador(text)">
+                <input type="text" placeholder="Buscar..." class="form-control mt-5" v-model="text" v-on:keyup="buscador(text)">
+            </form>
 
             <div v-if="carga" class="text-center mt-5">
                 <h3>Cargando contenido</h3>
                 <b-spinner type="grow" variant="success" label="Loading..."></b-spinner>
             </div>
-
+ 
          <ul class="list-group mt-5" v-if="!carga">
-             <li v-for="item of tareas" :key="item.id" class="list-group-item"> 
+             <li v-for="item of arrayFiltrado" :key="item.id" class="list-group-item"> 
                  {{item.id}} - {{item.nombre}}
                  <div class="float-right">
                 <router-link :to="{name:'editar' , params: {id:item.id}}" class="mr-2 " >
@@ -33,18 +36,24 @@
 
 <script>
 
-import {mapActions, mapState } from 'vuex'
+import {mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
     name: 'Inicio',
+    data(){
+        return {
+            text:''
+        }
+    },
     methods: {
-        ...mapActions(['getTareas', 'eliminarTareas'])
+        ...mapActions(['getTareas', 'eliminarTareas' , 'buscador'])
     },
     created(){ 
         this.getTareas();
     },
     computed:{
-        ...mapState(['tareas' , 'usuario' , 'carga'])
+        ...mapState(['tareas' , 'usuario' , 'carga']),
+        ...mapGetters(['arrayFiltrado'])
     }
     
 }
