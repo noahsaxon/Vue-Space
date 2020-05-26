@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="success"
+      color="black"
       dark
     >
       <div class="d-flex align-center">
@@ -21,17 +21,14 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
+      @click="cerrarSession" >
         <span class="mr-2">Cerrar Session</span>
         <v-icon>fas fa-external-link-alt</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-content>
-      <v-container>
+      <v-container >
         <router-view></router-view>
       </v-container>
     </v-content>
@@ -40,15 +37,17 @@
 
 <script>
 
+import {mapActions} from 'vuex'
+
 export default {
   name: 'App',
-
   components: {
-    
   },
-
   data: () => ({
     //
   }),
+  methods: {
+    ...mapActions(['cerrarSession'])
+  },
 };
 </script>
