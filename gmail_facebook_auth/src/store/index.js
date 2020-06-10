@@ -26,7 +26,7 @@ export default new Vuex.Store({
     },
     cerrarSession({commit}){
       auth.signOut();
-      commit(nuevoUsuario, null)
+      commit('nuevoUsuario', null)
       router.push({name:'Ingreso'})
     }
   },
