@@ -15,6 +15,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Ingreso',
     component: () => import(/* webpackChunkName: "about" */ '../views/Ingreso.vue')
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
   }
 ]
 

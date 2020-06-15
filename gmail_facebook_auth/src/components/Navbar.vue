@@ -82,7 +82,7 @@ export default {
             items:[
                 {title:'Dashboard' , icon:'fas fa-address-card', to: 'home'},
                 {title:'Perfil' , icon:'fas fa-address-card', to: 'account'},
-                {title:'Fotografias' , icon:'fas fa-address-card', to: 'fotos'}
+                {title:'Admin' , icon:'fas fa-address-card', to: 'admin'}
             ]
         }
     },
