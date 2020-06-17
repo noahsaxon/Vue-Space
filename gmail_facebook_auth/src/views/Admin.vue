@@ -22,6 +22,9 @@
                         Subir Imagen
                     </v-btn>                    
                 </v-card-text>
+                <v-card-text v-if="error">
+                    <h4>{{error}}</h4>
+                </v-card-text>
                 <v-card-text v-if="file">
                     <h4>{{file.name}}</h4>
                     <v-img :src="tempUrl"> </v-img>
@@ -41,6 +44,7 @@ export default {
     },
     data(){
         return {
+            error:false,
             file:null,
             tempUrl: '',
             loading: false
@@ -49,7 +53,17 @@ export default {
     methods: {
         buscarImagen(event) {
             console.log(event.target.files[0])
-            this.file = event.target.files[0];
+
+            const tipoArchivo = event.target.files[0].type;
+            if(tipoArchivo ==='image/jpeg' || tipoArchivo ==='image/png') {
+                this.file = event.target.files[0];                
+            } else {
+                this.error = 'Archivo no valido';
+                this.file = null;
+                return
+            }
+
+
             const reader = new FileReader();
             reader.readAsDataURL(this.file);
             reader.onload = (e) => {
@@ -63,7 +77,9 @@ export default {
                 const res =  await storageRef.put(this.file)
                 console.log(res);
                 const urlDescarga = await storageRef.getDownloadURL();
-                console.log(urlDescarga);
+                //guardar en base de datos
+                this.error = 'Imagen subida con exito'
+                this.file = null
             } catch (error) {  
                 console.log(error)
             } finally {

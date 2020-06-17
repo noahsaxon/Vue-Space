@@ -1,25 +1,31 @@
 <template>
   <v-app>
-    <Navbar></Navbar>
+
+    <Navbar v-if="usuario !== ''"></Navbar>
     <v-content>
       <v-container >
         <router-view></router-view>
       </v-container>
+
     </v-content>
   </v-app>
 </template>
 
 <script>
 
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import Navbar from '@/components/Navbar'
 export default {
   name: 'App',
   components: {
     Navbar
   },
-  data: () => ({
+  data: () => ( {
     //
-  })
+  }),
+  computed: {
+    ...mapState(['usuario'])
+  },
 };
+
 </script>

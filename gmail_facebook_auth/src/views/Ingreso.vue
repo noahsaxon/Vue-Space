@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations , mmapActions, mapActions} from 'vuex'
 import {firebase , auth, db} from "@/firebase"
 import router from '@/router'
 export default {
@@ -34,6 +34,7 @@ export default {
     },
     methods: {
         ...mapMutations(['nuevoUsuario']),
+        ...mapActions(['setUsuario']),
         async google() {
             const provider = new firebase.auth.GoogleAuthProvider();
             await this.ingresar(provider)
@@ -55,10 +56,9 @@ export default {
                     uid: user.uid,
                     foto: user.photoURL
                 }
-                this.nuevoUsuario(userdata);
+                this.setUsuario(userdata);
 
                 //guardar en firestore
-                await db.collection('usuarios').doc(userdata.uid).set(userdata) 
                 router.push({name:'Home'})
             } catch (error) {
                 console.log(error)
