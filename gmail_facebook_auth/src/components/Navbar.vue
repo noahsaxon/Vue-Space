@@ -17,7 +17,7 @@
           width="40"
         />
 
-      <span class="headline">Vue</span>
+      <span class="headline">LotImages.online</span>
       </div>
 
       <v-spacer></v-spacer>

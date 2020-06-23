@@ -1,12 +1,11 @@
 <template>
   <v-app>
 
-    <Navbar v-if="usuario !== ''"></Navbar>
+    <Navbar v-if="usuario !== '' && usuario !== {}"></Navbar>
     <v-content>
       <v-container >
         <router-view></router-view>
       </v-container>
-
     </v-content>
   </v-app>
 </template>
