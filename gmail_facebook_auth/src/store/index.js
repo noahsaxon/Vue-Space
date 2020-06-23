@@ -12,7 +12,7 @@ export default new Vuex.Store({
     nuevoUsuario(state , payload) {
 
       if(payload === null) {
-        state.usuario =  ''
+        state.usuario =  {}
       } else {
         state.usuario = payload;
       }

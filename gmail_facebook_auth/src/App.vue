@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <Navbar v-if="usuario !== '' && usuario !== {}"></Navbar>
+    <Navbar v-if="JSON.stringify(usuario) !== '{}' "></Navbar>
     <v-content>
       <v-container >
         <router-view></router-view>

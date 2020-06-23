@@ -73,10 +73,11 @@ export default {
         async subirImagen() {
                 try {
                 this.loading = true;
-                const storageRef = storage.ref().child(this.usuario.email).child('foto perfil');
+                const storageRef = storage.ref().child(this.usuario.email).child(this.file.name);
                 const res =  await storageRef.put(this.file)
                 console.log(res);
                 const urlDescarga = await storageRef.getDownloadURL();
+                console.log(urlDescarga);
                 //guardar en base de datos
                 this.error = 'Imagen subida con exito'
                 this.file = null
