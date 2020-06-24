@@ -37,8 +37,15 @@ export default new Vuex.Store({
     },
     cerrarSession({commit}){
       auth.signOut();
-      commit('nuevoUsuario', '')
+      commit('nuevoUsuario', {})
       router.push({name:'Ingreso'})
+    },
+    async saveImages({commit},image){
+      console.log('saveImages')
+      console.log(image);
+      const doc = await db.collection('images').add({name: image.name , url:image.url , uid:image.uid})
+      console.log('image saved ', doc);
+
     }
   },
   modules: {

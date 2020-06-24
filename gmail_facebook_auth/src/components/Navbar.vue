@@ -81,7 +81,7 @@ export default {
             drawer : false,
             items:[
                 {title:'Dashboard' , icon:'fas fa-address-card', to: 'home'},
-                {title:'Perfil' , icon:'fas fa-address-card', to: 'account'},
+                {title:'Perfil' , icon:'fas fa-address-card', to: 'galeria'},
                 {title:'Admin' , icon:'fas fa-address-card', to: 'admin'}
             ]
         }

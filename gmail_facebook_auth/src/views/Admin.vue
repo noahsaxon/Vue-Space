@@ -36,7 +36,7 @@
 
 <script>
 import {firebase , storage } from '@/firebase'
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
     name:'Admin',
     computed: {
@@ -51,6 +51,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['saveImages']),
         buscarImagen(event) {
             console.log(event.target.files[0])
 
@@ -78,7 +79,7 @@ export default {
                 console.log(res);
                 const urlDescarga = await storageRef.getDownloadURL();
                 console.log(urlDescarga);
-                //guardar en base de datos
+                this.saveImages({name : this.file.name , url:urlDescarga , uid:this.usuario.uid})
                 this.error = 'Imagen subida con exito'
                 this.file = null
             } catch (error) {  
