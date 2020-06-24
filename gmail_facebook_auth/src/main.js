@@ -11,7 +11,6 @@ Vue.config.productionTip = false
 auth.onAuthStateChanged(function(user) {
   if(user) {
     store.dispatch('setUsuario' , user )
-
   } 
   new Vue({
     router,

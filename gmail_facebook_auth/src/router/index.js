@@ -19,12 +19,14 @@ Vue.use(VueRouter)
   {
     path: '/galeria',
     name: 'Galeria',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Galeria.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Galeria.vue'),
+    meta: {requiresAuth:true} 
   },  
   {
     path: '/admin',
     name: 'Admin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue'),
+    meta: {requiresAuth:true} 
   }
 ]
 

@@ -6,22 +6,32 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    usuario: {}
+    usuario: {},
+    imagenes: {},
+    carga:false
   },
   mutations: {
     nuevoUsuario(state , payload) {
 
-      if(payload === null) {
+      if(payload === null || payload === {}) {
         state.usuario =  {}
       } else {
         state.usuario = payload;
       }
-    } 
+    },
+    cargarImagenes (state , payload) {
+      state.imagenes = payload;
+    },
+    setCarga(state, value){
+      state.carga = value;
+    }
+
   },
   actions: {
     async setUsuario({commit} , payload) {
       const doc = await db.collection('usuarios').doc(payload.uid).get()
       if(doc.exists){
+        
         commit('nuevoUsuario' , doc.data())
       } else {
         const usuario = {
@@ -33,7 +43,6 @@ export default new Vuex.Store({
         await db.collection('usuarios').doc(userdata.uid).set(usuario) 
         commit('nuevoUsuario' , usuario)        
       }
-
     },
     cerrarSession({commit}){
       auth.signOut();
@@ -41,11 +50,26 @@ export default new Vuex.Store({
       router.push({name:'Ingreso'})
     },
     async saveImages({commit},image){
-      console.log('saveImages')
-      console.log(image);
       const doc = await db.collection('images').add({name: image.name , url:image.url , uid:image.uid})
-      console.log('image saved ', doc);
+      //console.log('image saved ', doc);
+    },
+    async getImages({commit},uid){
+      console.log('uid: ' , uid)
+      const imageness = []
+       await db.collection('images').where("uid", "==" ,uid).get()
+      .then( imgns => {
+        console.log(imgns)
+        imgns.forEach(img => {
+          let imag = img.data()
+          imag.id = img.id
+          imageness.push(imag)
+        })
+        commit('cargarImagenes' , imageness)
+      })
 
+    },
+    loader({commit} , value){
+      commit('setCarga', value)
     }
   },
   modules: {
