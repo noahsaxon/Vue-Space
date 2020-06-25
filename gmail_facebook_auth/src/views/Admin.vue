@@ -40,7 +40,7 @@ import {mapState, mapActions} from 'vuex'
 export default {
     name:'Admin',
     computed: {
-        ...mapState(['usuario'])
+        ...mapState(['usuario', 'imagenes'])
     },
     data(){
         return {
@@ -80,6 +80,7 @@ export default {
                 const urlDescarga = await storageRef.getDownloadURL();
                 console.log(urlDescarga);
                 this.saveImages({name : this.file.name , url:urlDescarga , uid:this.usuario.uid})
+                this.imagenes.push({name : this.file.name , url:urlDescarga , uid:this.usuario.uid})
                 this.error = 'Imagen subida con exito'
                 this.file = null
             } catch (error) {  

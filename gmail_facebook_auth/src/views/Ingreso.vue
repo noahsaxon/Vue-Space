@@ -1,7 +1,13 @@
 <template>
-    <v-layout justify-center="true"> 
-        <v-flex xs12 sm8 md6 xl4 mt4>
-            <v-card>
+<v-parallax
+    height="800"
+    dark
+    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+  >
+    <v-layout justify-center="true" align="center" style="padding-top:140px"
+      > 
+        <v-flex xs12 sm8 md6 xl4 pt5 >
+            <v-card >
                 <v-card-text class="display-1 text-uppercase white--text text-xs-center" :class="registro ? 'success' : 'info'">
                     <span v-if="!registro">Ingreso</span>
                     <span v-if="registro">Registro</span>
@@ -19,6 +25,7 @@
         </v-flex>
         
     </v-layout>
+ </v-parallax>    
 </template>
 
 <script>

@@ -7,7 +7,7 @@
        <div v-if="JSON.stringify(usuario) !== '{}' ">
            <v-row>
                <v-col cols="12" md="4" v-for="imagen in imagenes" :key="imagen.name" >
-        <v-card class="d-inline-block mx-auto" :dark=true>
+        <v-card class="d-inline-block mx-auto" >
             <v-container>
             <v-row s>
                 <v-col cols="auto">
@@ -129,7 +129,6 @@ export default {
 
           try {
             var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
             this.dialog = !this.dialog;
           } catch (err) {
             alert('Oops, unable to copy');
