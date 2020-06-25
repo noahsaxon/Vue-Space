@@ -8,16 +8,9 @@
     >
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
 
-      <span class="headline">LotImages.online</span>
+
+      <span class="headline">lotimages.online</span>
       </div>
 
       <v-spacer></v-spacer>
@@ -81,7 +74,7 @@ export default {
             drawer : false,
             items:[
                 {title:'Dashboard' , icon:'fas fa-address-card', to: 'home'},
-              
+                {title:'Chat' , icon:'fas fa-comment', to: 'chat'}
             ]
         }
     },
