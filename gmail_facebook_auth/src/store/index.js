@@ -7,12 +7,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     usuario: {},
-    imagenes: {},
+    imagenes: null,
     carga:false
   },
   mutations: {
     nuevoUsuario(state , payload) {
-
       if(payload === null || payload === {}) {
         state.usuario =  {}
       } else {
@@ -29,19 +28,26 @@ export default new Vuex.Store({
   },
   actions: {
     async setUsuario({commit} , payload) {
+      let n = payload.displayName !== undefined ? payload.displayName : payload.nombre;
+      let f = payload.photoURL !== undefined ? payload.photoURL : payload.foto;
+      const usuario = {
+        nombre: n,
+        email: payload.email,
+        uid:payload.uid,
+        foto:f
+      }
+      console.log("usuario " , usuario);
       const doc = await db.collection('usuarios').doc(payload.uid).get()
-      if(doc.exists){
-        
-        commit('nuevoUsuario' , doc.data())
-      } else {
-        const usuario = {
-          nombre: payload.displayName,
-          email: payload.email,
-          uid:payload.uid,
-          foto:payload.photoURL
+      if (doc === undefined) {
+        if(!doc.exists){
+          commit('nuevoUsuario' , doc.data())
+        } else {
+          await db.collection('usuarios').doc(usuario.uid).set(usuario)
+          commit('nuevoUsuario' , usuario)
         }
-        await db.collection('usuarios').doc(userdata.uid).set(usuario) 
-        commit('nuevoUsuario' , usuario)        
+      } else {
+        await db.collection('usuarios').doc(usuario.uid).set(usuario)
+        commit('nuevoUsuario' , usuario)
       }
     },
     cerrarSession({commit}){
@@ -54,11 +60,10 @@ export default new Vuex.Store({
       //console.log('image saved ', doc);
     },
     async getImages({commit},uid){
-      console.log('uid: ' , uid)
+      console.log(' gettting images  uid: ' , uid)
       const imageness = []
        await db.collection('images').where("uid", "==" ,uid).get()
       .then( imgns => {
-        console.log(imgns)
         imgns.forEach(img => {
           let imag = img.data()
           imag.id = img.id

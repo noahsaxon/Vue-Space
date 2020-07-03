@@ -1,6 +1,6 @@
 <template>
 <v-parallax
-    height="800"
+    
     dark
     src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
   >
@@ -63,12 +63,12 @@ export default {
                     uid: user.uid,
                     foto: user.photoURL
                 }
-                this.setUsuario(userdata);
+                await this.setUsuario(userdata);
 
                 //guardar en firestore
                 router.push({name:'Home'})
             } catch (error) {
-                console.log(error)
+                console.log("error", error)
             }
         }
     },

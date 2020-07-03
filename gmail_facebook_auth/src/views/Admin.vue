@@ -6,7 +6,7 @@
                     <v-avatar>
                         <img
                             :src="usuario.foto"
-                            alt="John"
+                            :alt="usuario.nombre"
                         >
                     </v-avatar> 
                 </v-card-text>
@@ -53,8 +53,7 @@ export default {
     methods: {
         ...mapActions(['saveImages']),
         buscarImagen(event) {
-            console.log(event.target.files[0])
-
+            console.log("TYPE :: ", event.target.files[0]);
             const tipoArchivo = event.target.files[0].type;
             if(tipoArchivo ==='image/jpeg' || tipoArchivo ==='image/png') {
                 this.file = event.target.files[0];                
@@ -76,15 +75,13 @@ export default {
                 this.loading = true;
                 const storageRef = storage.ref().child(this.usuario.email).child(this.file.name);
                 const res =  await storageRef.put(this.file)
-                console.log(res);
                 const urlDescarga = await storageRef.getDownloadURL();
-                console.log(urlDescarga);
                 this.saveImages({name : this.file.name , url:urlDescarga , uid:this.usuario.uid})
                 this.imagenes.push({name : this.file.name , url:urlDescarga , uid:this.usuario.uid})
                 this.error = 'Imagen subida con exito'
                 this.file = null
             } catch (error) {  
-                console.log(error)
+                console.log("error " , error)
             } finally {
                 this.loading = false;
             }

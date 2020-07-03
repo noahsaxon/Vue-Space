@@ -27,13 +27,13 @@
                     justify="center"
                 >
                     <v-col class="px-0">
-                    <v-btn icon>
+                    <v-btn icon disabled>
                         <v-icon>fas fa-heart</v-icon>
                     </v-btn>
                     </v-col>
 
                     <v-col class="px-0">
-                    <v-btn icon>
+                    <v-btn icon disabled>
                         <v-icon>fas fa-bookmark</v-icon>
                     </v-btn>
                     </v-col>
@@ -108,7 +108,7 @@ export default {
         setTimeout(() => {
 
         this.loadImages(); 
-        }, 3000);
+        }, 4000);
         //console.log(this.usuario.uid)
        // this.loadImages()
     },
@@ -124,7 +124,7 @@ export default {
         },
         copyToClipboard(){
            let testingCodeToCopy = document.querySelector('#testing')
-          testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+          testingCodeToCopy.setAttribute('type', 'text')    
           testingCodeToCopy.select()
 
           try {

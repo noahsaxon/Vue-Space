@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h3>Bienvenido {{usuario.nombre}}</h3>
+  
     <Admin></Admin>
     <Galeria></Galeria>
   </div>

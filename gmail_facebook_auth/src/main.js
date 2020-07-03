@@ -12,8 +12,10 @@ Vue.use(VueChatScroll)
 Vue.config.productionTip = false
 auth.onAuthStateChanged(function(user) {
   if(user) {
+    console.log("logged user  : ", user)
     store.dispatch('setUsuario' , user )
-  } 
+  }
+
   new Vue({
     router,
     store,
