@@ -9,7 +9,7 @@
       <b-navbar-nav>
         <b-nav-item to="/">Inicio</b-nav-item>
         <b-nav-item to="/blog">Blog</b-nav-item>
-        <b-nav-item to="/blog">vuex</b-nav-item>
+        <b-nav-item to="/vuex">vuex</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
